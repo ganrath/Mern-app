@@ -25,7 +25,7 @@ setStudent({
 
 const handleCreate = () => {
 
-    axios.post('http://localhost:7500/students', student).then(() =>  {
+    axios.post('http://localhost:4100/students', student).then(() =>  {
         window.location.reload(true);
     });
 }

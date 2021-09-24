@@ -26,3 +26,14 @@ export const getStudents = async (req,res) => {
             res.status(404).json({message: err.message});
         }
     }
+
+    export const getFilter =  async (req,res) => {
+        console.log(req);
+        try{
+            const allStudents =  await StudentData.find({grade:req.body.grade});
+            res.status(200).json( allStudents);
+         }
+         catch(err){
+               res.status(404).json({message: err.message});
+         }
+    }
