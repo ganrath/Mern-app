@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import  React, { useState} from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
@@ -13,6 +15,7 @@ export default function Login(){
     password: ''
    })
 
+    const [message, setMessage] =  useState('')
 
    const  handleChange = (e) => {
 
@@ -22,6 +25,10 @@ export default function Login(){
     })
     
     }
+const handleCreate =() => {
+  console.log(2)
+}
+
 
     return(
         <Box
@@ -32,6 +39,7 @@ export default function Login(){
         noValidate
         autoComplete="off"
       >
+        <p>{message}</p>
         <FormControl variant="standard">
           <InputLabel htmlFor="component-simple">User Name</InputLabel>
           <Input id="component-simple" value={data.userName}  name='userName' onChange={handleChange} />
@@ -42,7 +50,7 @@ export default function Login(){
           <Input id="component-simple" value={data.password} name='password' onChange={handleChange} />
         </FormControl>
         <Divider light />
-        <Button variant="contained">Login</Button>
+        <Button variant="contained" onClick={handleCreate}>Login</Button>
         </Box>
     )
 }

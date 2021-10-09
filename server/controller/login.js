@@ -1,6 +1,6 @@
 import Login from '../model/login.js';
 
-export const register = async (req,res) => {
+export const register = async (req,res,next) => {
     const user = req.body;
  
     const newUser = new Login(user)

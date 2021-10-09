@@ -1,27 +1,47 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import cors from 'cors'; 
 import mongoose from 'mongoose';
 import studentRoutes from './routes/student.js'
+import loginRoutes from './routes/login.js';
+import employeeRoutes from './routes/employee.js'
+
 
 
 
 const app = express();
 
+const CONNECTION_URL='mongodb://localhost/subscribers';
+
 app.use(express.json({limit:"20mb", extended: true} ));
 app.use(express.urlencoded({limit:"20mb", extended: true} ));
 
+app.use(cookieParser());
+
+// app.use(session({
+//     secret: 'Very secret',
+//     resave: true,
+//     store: MongoStore.create({ mongoUrl: CONNECTION_URL })
+//   }));
+
+// app.use(auth.initialize);
+// app.use(auth.session);
+// app.use(auth.setUser);
+
 app.use(cors());
-app.options('*', cors()) ;
+app.options('*', cors() ) ;
 
 app.use('/students', studentRoutes);
 
+app.use('/login', loginRoutes);
+
+app.use('/employee', employeeRoutes);
 
 
 
-
-
-const CONNECTION_URL='mongodb://localhost/subscribers';
 
 const PORT = process.env.PORT || 7500;
 

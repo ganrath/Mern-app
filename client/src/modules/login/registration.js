@@ -23,13 +23,14 @@ export default function Registration(){
     })
     
     }
-
     const handleCreate = () => {
 
-        axios.post('http://localhost:4100/students', data).then(() =>  {
-            window.location.reload(true);
-        });
-    }
+      axios.post('http://localhost:7500/login/register', data).then(() =>  {
+          window.location.reload(true);
+      });
+    };
+  
+    
 
     return(
         <Box

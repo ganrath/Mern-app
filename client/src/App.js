@@ -13,15 +13,12 @@ function App() {
   return (
     <Router>
    <Switch>
-          <Route path="/">
-            <LoginForm />
-          </Route>
-          <Route path="/login">
-            <LoginForm />
-          </Route>
-          <Route path="/student">
-            <StudentModule />
-          </Route>
+          <Route path="/" exact component={LoginForm}/>
+
+          <Route path="/login"  component={LoginForm}/>
+   
+          <Route path="/student"  component={StudentModule}/>
+  
      
         </Switch>
        </Router>

@@ -4,14 +4,25 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
+const instance = axios.create({
+  baseURL: "http://localhost:4100",
+  withCredentials: false,
+  headers: {
+    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }
+});
+
+
+
 export default function CreateStudent() {
 
 
    const [student, setStudent] = useState({
-       regNo: 0,
-       studentName: '',
-       grade: '',
-       section: ''
+       regNo: 12,
+       studentName: 'SSSS',
+       grade: 'D',
+       section: 'C'
    })
 
 const  handleChange = (e) => {
@@ -25,8 +36,8 @@ setStudent({
 
 const handleCreate = () => {
 
-    axios.post('http://localhost:4100/students', student).then(() =>  {
-        window.location.reload(true);
+  instance.post('/', student, { crossdomain: true }).then(() =>  {
+       // window.location.reload(true);
     });
 }
 
