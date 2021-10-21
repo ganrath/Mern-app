@@ -5,11 +5,11 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "http://localhost:4100",
   withCredentials: false,
   headers: {
     'Access-Control-Allow-Origin' : '*',
     'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    'Content-Type': 'application/json'
     }
 });
 
@@ -36,7 +36,7 @@ setStudent({
 
 const handleCreate = () => {
 
-  instance.post('/', student, { crossdomain: true }).then(() =>  {
+  instance.post('/api', student, { crossdomain: true }).then(() =>  {
        // window.location.reload(true);
     });
 }
