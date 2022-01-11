@@ -1,14 +1,14 @@
 import express from 'express';
-import { getStudents, createStudent , getFilter} from '../controller/student.js'
+import { getStudents, createStudent , getFilter, cookieChecker} from '../controller/student.js'
 
 import cors from 'cors'; 
 const router = express.Router();
 
-router.get('/', getStudents);
+router.get('/', cookieChecker, getStudents);
 
-router.get('/filter', getFilter);
+router.get('/filter',cookieChecker,  getFilter);
 
-router.post('/',createStudent);
+router.post('/',cookieChecker, createStudent);
 
 
 

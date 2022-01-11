@@ -2,27 +2,38 @@ import  React, { useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import axios from 'axios';
-
-const instance = axios.create({
-  withCredentials: false,
-  headers: {
-    'Access-Control-Allow-Origin' : '*',
-    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    'Content-Type': 'application/json'
-    }
-});
+import  { postStudentAction } from '../../features/student'; 
+import { useDispatch } from "react-redux";
+import { useFormik, ErrorMessage , Form} from 'formik';
+import { Formik, Field, Form,  } from 'formik';
+import * as Yup from 'yup';
 
 
 
 export default function CreateStudent() {
 
-
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues:{
+     regNo:'',
+    studentName: '',
+    password:'',
+    confirmPassword:'',
+    email: '', 
+    mobile:'',
+    Country: '',
+  },
+  validaionSchema: Yup.object({
+     regNo:Yup.mixed()
+    .max(6,'Must be 6 Character or less')
+    .required('Required'),
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  }) 
+})
    const [student, setStudent] = useState({
-       regNo: 12,
-       studentName: 'SSSS',
-       grade: 'D',
-       section: 'C'
+  
    })
 
 const  handleChange = (e) => {
@@ -35,10 +46,7 @@ setStudent({
 }
 
 const handleCreate = () => {
-
-  instance.post('/api', student, { crossdomain: true }).then(() =>  {
-       // window.location.reload(true);
-    });
+  dispatch(postStudentAction(student));
 }
 
   return (

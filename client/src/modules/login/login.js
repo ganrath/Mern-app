@@ -7,12 +7,15 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 export default function Login(){
 
+  let history = useHistory();
    const [data, setData] = useState({
-    userName: '',
-    password: ''
+    userName: 'gan',
+    password: 'gan'
    })
 
     const [message, setMessage] =  useState('')
@@ -26,7 +29,12 @@ export default function Login(){
     
     }
 const handleCreate =() => {
-  console.log(2)
+  axios.post('http://localhost:7500/login', data ,{
+    withCredentials: true }).then((res) =>  {
+     if(res.data.message){
+      history.push("/student");
+     }
+});
 }
 
 

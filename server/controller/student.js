@@ -11,6 +11,16 @@ export const getStudents = async (req,res) => {
  
     }
 
+  export const cookieChecker = async(req,res,next) =>{
+
+      if(req.session){
+          next();
+      }else{
+        res.status(404).json({message: 'unAuthorized user'});
+      }
+
+  }
+
     export const createStudent =  async (req,res) => {
         const student = req.body;
         if (student.section.length == 0 ) {

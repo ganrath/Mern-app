@@ -9,24 +9,24 @@ const loginSchema = mongoose.Schema({
 },
 {timestamps: true} );
 
-loginSchema.pre('save', async function preSave(next){
-      const user = this;
-      if(!user.isModified('password')) return next();
+// loginSchema.pre('save', async function preSave(next){
+//       const user = this;
+//       if(!user.isModified('password')) return next();
 
-      try{
-            const hash = await bcrypt.hash(user.password, saltRounds);
-            user.password = hash;
-            return next();
-      }
-      catch(err){
-            return next(err);
-      }
+//       try{
+//             const hash = await bcrypt.hash(user.password, saltRounds);
+//             user.password = hash;
+//             return next();
+//       }
+//       catch(err){
+//             return next(err);
+//       }
 
-})
+// })
 
-loginSchema.methods.comparePassword = async function comparePassword(candidate){
-      return bcrypt.compare(candidate, this.password);
-}
+// loginSchema.methods.comparePassword = async function comparePassword(candidate){
+//       return bcrypt.compare(candidate, this.password);
+// }
 
 
 const login = mongoose.model('login', loginSchema)

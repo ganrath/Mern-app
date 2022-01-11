@@ -6,16 +6,25 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import {useSelector , useDispatch } from "react-redux";
+import  { getStudentAction } from '../../features/student'; 
+
 
 const Student = () => {
   const [grade, setGrade] = useState('');
-  const [data, setData] = useState([]); 
 
+  const  { student } = useSelector((state) => state.student);
+  
+  const  { newStudentAdded } = useSelector((state) => state.student);
+
+  const dispatch = useDispatch();
+
+  console.log("student", student);
 
   const handleChange = (event) => {
     setGrade(event.target.value);
@@ -24,13 +33,10 @@ const Student = () => {
   
   };
 
-  useEffect(()=>{
-
-    axios.get('http://localhost:7500/students').then(allstudent => {
-      setData(allstudent.data);
-    });
-
-  },[])
+  
+  useEffect( ()=>{
+    dispatch(getStudentAction());
+  },[newStudentAdded])
 
 
  
@@ -69,7 +75,7 @@ const Student = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {student.map((row) => (
             <TableRow
               key={row._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
